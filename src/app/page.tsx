@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { BrickBackground } from "@/components/ui/brick-background";
+import { GradientBackground } from "@/components/ui/gradient-background";
 import {
   ArrowRight,
   TrendingUp,
@@ -57,11 +59,17 @@ export default function Home() {
               Watch Demo
             </Button>
           </div>
-          <div className="mt-20 rounded-3xl overflow-hidden max-w-5xl mx-auto h-[400px] shadow-2xl relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#C9A3C9] via-[#8BA8D4] to-[#5B5B94]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,_#C9A3C9_0%,_transparent_50%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,_#5B5B94_0%,_transparent_50%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_#8BA8D4_0%,_transparent_60%)]" />
+          <div className="mt-20 max-w-5xl mx-auto h-[400px] relative">
+            <div className="absolute inset-0 -inset-x-12 rounded-3xl">
+              <BrickBackground
+                palette="Scorpio"
+                orientation="horizontal"
+                gap={2}
+                blur={true}
+                backgroundColor="white"
+                seed={12345}
+              />
+            </div>
             <div className="relative w-full h-full flex items-center justify-center">
               {/* Hero content will go here */}
             </div>
@@ -106,10 +114,7 @@ export default function Home() {
               </div>
             </div>
             <div className="rounded-3xl overflow-hidden h-[400px] shadow-xl relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#C8CF7C] via-[#B780D9] to-[#7EC8E3]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_#C8CF7C_0%,_transparent_45%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_#7EC8E3_0%,_transparent_50%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_60%,_#B780D9_0%,_transparent_55%)]" />
+              <BrickBackground palette="Libra" blur={false} seed={12345} />
               <div className="relative w-full h-full flex items-center justify-center">
                 {/* Budgeting feature image will go here */}
               </div>
@@ -123,10 +128,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1 rounded-3xl overflow-hidden h-[400px] shadow-xl relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#F2C8D4] via-[#D5976D] to-[#8BBDD9]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_40%,_#F2C8D4_0%,_transparent_50%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_30%,_#8BBDD9_0%,_transparent_48%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_70%,_#D5976D_0%,_transparent_52%)]" />
+              <GradientBackground palette="Libra" />
               <div className="relative w-full h-full flex items-center justify-center">
                 {/* Saving goals image will go here */}
               </div>
@@ -198,10 +200,7 @@ export default function Home() {
               </div>
             </div>
             <div className="rounded-3xl overflow-hidden h-[400px] shadow-xl relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#A24672] via-[#A1AAC0] to-[#2B3D4F]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,_#A24672_0%,_transparent_48%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_75%,_#2B3D4F_0%,_transparent_50%)]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_#A1AAC0_0%,_transparent_58%)]" />
+              <GradientBackground palette="Leo" />
               <div className="relative w-full h-full flex items-center justify-center">
                 {/* Investment dashboard image will go here */}
               </div>
