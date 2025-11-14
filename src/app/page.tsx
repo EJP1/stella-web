@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BrickBackground } from "@/components/ui/brick-background";
 import { GradientBackground } from "@/components/ui/gradient-background";
+import { RotatedBrick } from "@/components/ui/rotated-brick";
 import {
   ArrowRight,
   TrendingUp,
@@ -41,8 +42,8 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="pt-32 pb-20">
+        <div className="text-center px-6">
           <p className="text-muted-foreground mb-4">
             AI-powered financial services
           </p>
@@ -59,21 +60,18 @@ export default function Home() {
               Watch Demo
             </Button>
           </div>
-          <div className="mt-20 max-w-5xl mx-auto h-[400px] relative">
-            <div className="absolute inset-0 -inset-x-12 rounded-3xl">
-              <BrickBackground
-                palette="Pisces"
-                orientation="horizontal"
-                gap={2}
-                blur={true}
-                backgroundColor="white"
-                seed={12345}
-                animate
-              />
-            </div>
-            <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
-              {/* Hero content will go here */}
-            </div>
+        </div>
+        <div className="mt-20 w-full h-[400px] relative">
+          <BrickBackground
+            palette="Pisces"
+            orientation="horizontal"
+            gap={10}
+            blur={false}
+            backgroundColor="white"
+            animate
+          />
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            {/* Hero content will go here */}
           </div>
         </div>
       </section>
@@ -82,6 +80,9 @@ export default function Home() {
       <section id="features" className="py-20 px-6 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="h-[500px] flex items-center justify-center">
+              <RotatedBrick palette="Pisces" colorIndex={2} skew={15} />
+            </div>
             <div>
               <h2 className="text-4xl font-bold mb-4">
                 Stella is for <span className="text-primary">Budgeting</span>
@@ -112,12 +113,6 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="rounded-3xl overflow-hidden h-[400px] shadow-xl relative">
-              <BrickBackground palette="Libra" blur={false} seed={12345} />
-              <div className="relative w-full h-full flex items-center justify-center">
-                {/* Budgeting feature image will go here */}
               </div>
             </div>
           </div>
