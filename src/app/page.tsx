@@ -62,15 +62,16 @@ export default function Home() {
           <div className="mt-20 max-w-5xl mx-auto h-[400px] relative">
             <div className="absolute inset-0 -inset-x-12 rounded-3xl">
               <BrickBackground
-                palette="Scorpio"
+                palette="Pisces"
                 orientation="horizontal"
                 gap={2}
                 blur={true}
                 backgroundColor="white"
                 seed={12345}
+                animate
               />
             </div>
-            <div className="relative w-full h-full flex items-center justify-center">
+            <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
               {/* Hero content will go here */}
             </div>
           </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { colorPalettes, type PaletteKey } from "@/lib/color-palettes";
 
 interface Brick {
@@ -19,6 +19,7 @@ interface BrickBackgroundProps {
   orientation?: "horizontal" | "vertical";
   gap?: number;
   backgroundColor?: string;
+  animate?: boolean;
 }
 
 export function BrickBackground({
@@ -29,7 +30,9 @@ export function BrickBackground({
   orientation = "horizontal",
   gap = 0,
   backgroundColor = "#E8E3D8",
+  animate = false,
 }: BrickBackgroundProps) {
+  const [hoveredBrick, setHoveredBrick] = useState<number | null>(null);
   // Resolve palette name to colors array
   const colors = typeof palette === "string" ? colorPalettes[palette] : palette;
   const bricks = useMemo(() => {
@@ -112,27 +115,89 @@ export function BrickBackground({
   }, [colors, seed, orientation, gap]);
 
   return (
-    <div
-      className={`absolute inset-0 ${className}`}
+    <div 
+      className={`absolute inset-0 ${className}`} 
       style={{ backgroundColor }}
     >
+      {/* Background layer with blur */}
+      {blur && (
+        <svg
+          className="w-full h-full absolute inset-0"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          shapeRendering="crispEdges"
+          style={{ filter: 'blur(1px)', opacity: 0.9, pointerEvents: 'none' }}
+        >
+          {bricks.map((brick, index) => {
+            const centerX = brick.x + brick.width / 2;
+            const centerY = brick.y + brick.height / 2;
+            const rotation = animate && hoveredBrick === index ? 5 : 0;
+            
+            return (
+              <rect
+                key={`blur-${index}`}
+                x={brick.x}
+                y={brick.y}
+                width={brick.width}
+                height={brick.height}
+                fill={brick.color}
+                transform={`rotate(${rotation} ${centerX} ${centerY})`}
+                style={{
+                  transition: hoveredBrick === index 
+                    ? 'all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)' 
+                    : 'all 0.8s ease-out',
+                }}
+              />
+            );
+          })}
+        </svg>
+      )}
+      {/* Interactive layer */}
       <svg
-        className="w-full h-full"
+        className="w-full h-full absolute inset-0"
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
         shapeRendering="crispEdges"
-        style={blur ? { filter: "blur(2px)", opacity: 0.9 } : undefined}
+        style={{ pointerEvents: animate ? 'auto' : 'none' }}
       >
-        {bricks.map((brick, index) => (
-          <rect
-            key={index}
-            x={brick.x}
-            y={brick.y}
-            width={brick.width}
-            height={brick.height}
-            fill={brick.color}
-          />
-        ))}
+        {bricks.map((brick, index) => {
+          const centerX = brick.x + brick.width / 2;
+          const centerY = brick.y + brick.height / 2;
+          const rotation = animate && hoveredBrick === index ? 5 : 0;
+          
+          return (
+            <g 
+              key={index}
+              onMouseEnter={() => setHoveredBrick(index)}
+              onMouseLeave={() => setHoveredBrick(null)}
+            >
+              {/* Larger invisible hit area */}
+              <rect
+                x={brick.x - 0.5}
+                y={brick.y - 0.5}
+                width={brick.width + 1}
+                height={brick.height + 1}
+                fill="transparent"
+                style={{ cursor: 'pointer' }}
+              />
+              {/* Visual brick */}
+              <rect
+                x={brick.x}
+                y={brick.y}
+                width={brick.width}
+                height={brick.height}
+                fill={blur ? 'transparent' : brick.color}
+                transform={`rotate(${rotation} ${centerX} ${centerY})`}
+                style={{
+                  pointerEvents: 'none',
+                  transition: hoveredBrick === index 
+                    ? 'all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)' 
+                    : 'all 0.8s ease-out',
+                }}
+              />
+            </g>
+          );
+        })}
       </svg>
     </div>
   );
