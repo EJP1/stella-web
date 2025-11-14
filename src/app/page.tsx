@@ -1,102 +1,398 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  ArrowRight,
+  TrendingUp,
+  PiggyBank,
+  Target,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-background">
+      {/* Header/Navigation */}
+      <header className="fixed top-0 w-full bg-background/80 backdrop-blur-sm border-b border-border z-50">
+        <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-8">
+            <a href="/" className="text-2xl font-bold">
+              Stella
+            </a>
+            <div className="hidden md:flex items-center gap-6">
+              <a
+                href="#features"
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                Features
+              </a>
+              <a
+                href="#pricing"
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                Pricing
+              </a>
+            </div>
+          </div>
+          <Button>Get Started</Button>
+        </nav>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 px-6">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-muted-foreground mb-4">
+            AI-powered financial services
+          </p>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8">
+            Your money,
+            <br />
+            <span className="text-primary">simplified</span>
+          </h1>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+            <Button size="lg" className="text-base">
+              Get Started
+            </Button>
+            <Button size="lg" variant="outline" className="text-base">
+              Watch Demo
+            </Button>
+          </div>
+          <div className="mt-20 rounded-2xl border border-border bg-muted/30 p-8 max-w-5xl mx-auto">
+            <div className="text-center text-muted-foreground">
+              [Hero Image Placeholder]
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section - Budgeting */}
+      <section id="features" className="py-20 px-6 bg-muted/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold mb-4">
+                Stella is for <span className="text-primary">Budgeting</span>
+              </h2>
+              <p className="text-xl text-muted-foreground mb-8">
+                Track every dollar automatically
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <Target className="w-6 h-6 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">
+                      Smart category detection
+                    </h3>
+                    <p className="text-muted-foreground">
+                      AI automatically categorizes your spending
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Sparkles className="w-6 h-6 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">
+                      Personalized insights
+                    </h3>
+                    <p className="text-muted-foreground">
+                      Get actionable recommendations based on your habits
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="rounded-2xl border border-border bg-background p-8">
+              <div className="text-center text-muted-foreground">
+                [Budgeting Feature Image]
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section - Saving */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1 rounded-2xl border border-border bg-muted/30 p-8">
+              <div className="text-center text-muted-foreground">
+                [Saving Goals Image]
+              </div>
+            </div>
+            <div className="order-1 md:order-2">
+              <h2 className="text-4xl font-bold mb-4">
+                Stella is for <span className="text-primary">Saving</span>
+              </h2>
+              <p className="text-xl text-muted-foreground mb-8">
+                Reach your goals faster
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <PiggyBank className="w-6 h-6 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">Automatic savings</h3>
+                    <p className="text-muted-foreground">
+                      Set it and forget it with round-up savings
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Target className="w-6 h-6 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">Goal tracking</h3>
+                    <p className="text-muted-foreground">
+                      Visualize progress towards your financial goals
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section - Investing */}
+      <section className="py-20 px-6 bg-muted/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold mb-4">
+                Stella is for <span className="text-primary">Investing</span>
+              </h2>
+              <p className="text-xl text-muted-foreground mb-8">
+                Build wealth with confidence
+              </p>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <TrendingUp className="w-6 h-6 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">
+                      AI-powered recommendations
+                    </h3>
+                    <p className="text-muted-foreground">
+                      Get personalized investment strategies
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Sparkles className="w-6 h-6 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">Portfolio tracking</h3>
+                    <p className="text-muted-foreground">
+                      Monitor your investments in real-time
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="rounded-2xl border border-border bg-background p-8">
+              <div className="text-center text-muted-foreground">
+                [Investment Dashboard Image]
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-4">
+            Stella is for <span className="text-primary">You</span>
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6 mt-12">
+            <Card>
+              <CardContent className="pt-6">
+                <p className="mb-4">
+                  "Stella helped me save $5,000 in just 6 months. The automatic
+                  savings feature is a game-changer."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10" />
+                  <div>
+                    <p className="font-semibold">Sarah</p>
+                    <p className="text-sm text-muted-foreground">
+                      Small Business Owner
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-6">
+                <p className="mb-4">
+                  "Finally, an app that makes investing simple. Stella's AI
+                  gives me confidence in my decisions."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10" />
+                  <div>
+                    <p className="font-semibold">Michael</p>
+                    <p className="text-sm text-muted-foreground">
+                      Software Engineer
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-6">
+                <p className="mb-4">
+                  "I've tried every budgeting app. Stella is the only one that
+                  actually works for me."
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10" />
+                  <div>
+                    <p className="font-semibold">Jessica</p>
+                    <p className="text-sm text-muted-foreground">
+                      Marketing Manager
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Privacy Section */}
+      <section className="py-20 px-6 bg-muted/30">
+        <div className="max-w-4xl mx-auto text-center">
+          <ShieldCheck className="w-16 h-16 mx-auto mb-6 text-primary" />
+          <h2 className="text-4xl font-bold mb-4">
+            Privacy in Stella, you're in control
+          </h2>
+          <p className="text-xl text-muted-foreground mb-6">
+            Stella exists to help you achieve financial freedom, not to profit
+            off your personal data. We believe it's up to you to customize what
+            you see and what you share.
+          </p>
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/privacy"
+            className="text-primary hover:underline font-medium"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+            Learn more about privacy in Stella →
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-5xl font-bold mb-4">
+            Stella. <span className="text-primary">Take control.</span>
+          </h2>
+          <Button size="lg" className="mt-8 text-base">
+            Get Started <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+          <p className="text-muted-foreground mt-6">
+            Available on iOS, Android, and Web.
+          </p>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border py-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="font-bold mb-4">Product</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a
+                    href="#features"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Features
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/privacy"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Privacy
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/terms"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Terms of Use
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold mb-4">Resources</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a
+                    href="/help"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Help Center
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/blog"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Blog
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold mb-4">Company</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a
+                    href="/about"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/careers"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Careers
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-bold mb-4">Connect</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a
+                    href="#"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Twitter
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-12 pt-8 border-t border-border text-center text-muted-foreground">
+            <p>© 2025 Stella. All rights reserved.</p>
+          </div>
+        </div>
       </footer>
     </div>
   );
