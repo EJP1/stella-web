@@ -154,9 +154,10 @@ export function BrickBackground({
           style={{ filter: "blur(1px)", opacity: 0.9, pointerEvents: "none" }}
         >
           {bricks.map((brick, index) => {
-            const centerX = brick.x + brick.width / 2;
+            const skew = animate && hoveredBrick === index ? 5 : 0;
+            // Calculate offset to keep brick centered during skew
             const centerY = brick.y + brick.height / 2;
-            const rotation = animate && hoveredBrick === index ? 5 : 0;
+            const skewOffset = Math.tan((skew * Math.PI) / 180) * centerY;
 
             return (
               <rect
@@ -166,7 +167,7 @@ export function BrickBackground({
                 width={brick.width}
                 height={brick.height}
                 fill={brick.color}
-                transform={`rotate(${rotation} ${centerX} ${centerY})`}
+                transform={`translate(${-skewOffset} 0) skewX(${skew})`}
                 style={{
                   transition:
                     hoveredBrick === index
@@ -187,9 +188,10 @@ export function BrickBackground({
         style={{ pointerEvents: animate ? "auto" : "none" }}
       >
         {bricks.map((brick, index) => {
-          const centerX = brick.x + brick.width / 2;
+          const skew = animate && hoveredBrick === index ? 5 : 0;
+          // Calculate offset to keep brick centered during skew
           const centerY = brick.y + brick.height / 2;
-          const rotation = animate && hoveredBrick === index ? 5 : 0;
+          const skewOffset = Math.tan((skew * Math.PI) / 180) * centerY;
 
           return (
             <g
@@ -213,7 +215,7 @@ export function BrickBackground({
                 width={brick.width}
                 height={brick.height}
                 fill={blur ? "transparent" : brick.color}
-                transform={`rotate(${rotation} ${centerX} ${centerY})`}
+                transform={`translate(${-skewOffset} 0) skewX(${skew})`}
                 style={{
                   pointerEvents: "none",
                   transition:
