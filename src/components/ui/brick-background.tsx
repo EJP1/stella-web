@@ -33,18 +33,20 @@ export function BrickBackground({
   animate = false,
 }: BrickBackgroundProps) {
   const [hoveredBrick, setHoveredBrick] = useState<number | null>(null);
-  const [dimensions, setDimensions] = useState({ width: 1000, height: 1000 });
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const [isReady, setIsReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-
+  
   useEffect(() => {
     if (containerRef.current) {
       const updateDimensions = () => {
         const rect = containerRef.current!.getBoundingClientRect();
         setDimensions({ width: rect.width, height: rect.height });
+        setIsReady(true);
       };
       updateDimensions();
-      window.addEventListener("resize", updateDimensions);
-      return () => window.removeEventListener("resize", updateDimensions);
+      window.addEventListener('resize', updateDimensions);
+      return () => window.removeEventListener('resize', updateDimensions);
     }
   }, []);
 
@@ -135,7 +137,12 @@ export function BrickBackground({
     <div
       ref={containerRef}
       className={`absolute inset-0 ${className}`}
-      style={{ backgroundColor }}
+      style={{ 
+        backgroundColor,
+        opacity: isReady ? 1 : 0,
+        filter: isReady ? 'blur(0px)' : 'blur(10px)',
+        transition: 'opacity 0.5s ease-in, filter 0.5s ease-in',
+      }}
     >
       {/* Background layer with blur */}
       {blur && (
