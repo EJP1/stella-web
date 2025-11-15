@@ -1,11 +1,12 @@
 import { BrickBackground } from "@/components/ui/brick-background";
 import { colorPalettes, type PaletteKey } from "@/lib/color-palettes";
+import { PageLayout } from "@/components/page-layout";
 
 export default function BrickExamplesPage() {
   const palettes = Object.keys(colorPalettes) as PaletteKey[];
 
   return (
-    <div className="min-h-screen bg-background">
+    <PageLayout includeHeader={false}>
       {/* Header */}
       <header className="bg-background border-b border-border">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -63,6 +64,6 @@ export default function BrickExamplesPage() {
           </p>
         </div>
       </footer>
-    </div>
+    </PageLayout>
   );
 }
