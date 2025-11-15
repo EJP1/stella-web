@@ -1,5 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { BrickBackground } from "@/components/ui/brick-background";
+import { GradientBackground } from "@/components/ui/gradient-background";
+import { RotatedBrick } from "@/components/ui/rotated-brick";
+import { PageLayout } from "@/components/page-layout";
 import {
   ArrowRight,
   TrendingUp,
@@ -11,36 +15,10 @@ import {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header/Navigation */}
-      <header className="fixed top-0 w-full bg-background/80 backdrop-blur-sm border-b border-border z-50">
-        <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <a href="/" className="text-2xl font-bold">
-              Stella
-            </a>
-            <div className="hidden md:flex items-center gap-6">
-              <a
-                href="#features"
-                className="text-sm font-medium hover:text-primary transition-colors"
-              >
-                Features
-              </a>
-              <a
-                href="#pricing"
-                className="text-sm font-medium hover:text-primary transition-colors"
-              >
-                Pricing
-              </a>
-            </div>
-          </div>
-          <Button>Get Started</Button>
-        </nav>
-      </header>
-
+    <PageLayout includeFooter>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="pt-32 pb-20">
+        <div className="text-center px-4 sm:px-6">
           <p className="text-muted-foreground mb-4">
             AI-powered financial services
           </p>
@@ -57,18 +35,29 @@ export default function Home() {
               Watch Demo
             </Button>
           </div>
-          <div className="mt-20 rounded-2xl border border-border bg-muted/30 p-8 max-w-5xl mx-auto">
-            <div className="text-center text-muted-foreground">
-              [Hero Image Placeholder]
-            </div>
+        </div>
+        <div className="mt-20 w-full h-[400px] relative">
+          <BrickBackground
+            palette="Pisces"
+            orientation="horizontal"
+            gap={10}
+            blur={false}
+            backgroundColor="white"
+            animate
+          />
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            {/* Hero content will go here */}
           </div>
         </div>
       </section>
 
       {/* Features Section - Budgeting */}
-      <section id="features" className="py-20 px-6 bg-muted/30">
+      <section id="features" className="py-20 px-4 sm:px-6 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="h-[500px] flex items-center justify-center">
+              <RotatedBrick palette="Pisces" colorIndex={2} skew={15} />
+            </div>
             <div>
               <h2 className="text-4xl font-bold mb-4">
                 Stella is for <span className="text-primary">Budgeting</span>
@@ -101,22 +90,18 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="rounded-2xl border border-border bg-background p-8">
-              <div className="text-center text-muted-foreground">
-                [Budgeting Feature Image]
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* Features Section - Saving */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1 rounded-2xl border border-border bg-muted/30 p-8">
-              <div className="text-center text-muted-foreground">
-                [Saving Goals Image]
+            <div className="order-2 md:order-1 rounded-3xl overflow-hidden h-[400px] shadow-xl relative">
+              <GradientBackground palette="Libra" />
+              <div className="relative w-full h-full flex items-center justify-center">
+                {/* Saving goals image will go here */}
               </div>
             </div>
             <div className="order-1 md:order-2">
@@ -152,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* Features Section - Investing */}
-      <section className="py-20 px-6 bg-muted/30">
+      <section className="py-20 px-4 sm:px-6 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -185,9 +170,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="rounded-2xl border border-border bg-background p-8">
-              <div className="text-center text-muted-foreground">
-                [Investment Dashboard Image]
+            <div className="rounded-3xl overflow-hidden h-[400px] shadow-xl relative">
+              <GradientBackground palette="Leo" />
+              <div className="relative w-full h-full flex items-center justify-center">
+                {/* Investment dashboard image will go here */}
               </div>
             </div>
           </div>
@@ -195,7 +181,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4">
             Stella is for <span className="text-primary">You</span>
@@ -257,7 +243,7 @@ export default function Home() {
       </section>
 
       {/* Privacy Section */}
-      <section className="py-20 px-6 bg-muted/30">
+      <section className="py-20 px-4 sm:px-6 bg-muted/30">
         <div className="max-w-4xl mx-auto text-center">
           <ShieldCheck className="w-16 h-16 mx-auto mb-6 text-primary" />
           <h2 className="text-4xl font-bold mb-4">
@@ -278,7 +264,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl font-bold mb-4">
             Stella. <span className="text-primary">Take control.</span>
@@ -291,109 +277,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t border-border py-12 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="font-bold mb-4">Product</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#features"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/privacy"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Privacy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/terms"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Terms of Use
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold mb-4">Resources</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="/help"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Help Center
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/blog"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Blog
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold mb-4">Company</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="/about"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/careers"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Careers
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold mb-4">Connect</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Twitter
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-12 pt-8 border-t border-border text-center text-muted-foreground">
-            <p>© 2025 Stella. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </PageLayout>
   );
 }
