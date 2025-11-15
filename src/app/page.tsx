@@ -16,7 +16,6 @@ import {
 export default function Home() {
   return (
     <PageLayout includeFooter>
-
       {/* Hero Section */}
       <section className="pt-32 pb-20">
         <div className="text-center px-4 sm:px-6">

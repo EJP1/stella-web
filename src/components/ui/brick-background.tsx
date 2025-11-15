@@ -9,6 +9,7 @@ interface Brick {
   width: number;
   height: number;
   color: string;
+  hasInitialSkew: boolean;
 }
 
 interface BrickBackgroundProps {
@@ -20,23 +21,25 @@ interface BrickBackgroundProps {
   gap?: number;
   backgroundColor?: string;
   animate?: boolean;
+  skewPercentage?: number; // Percentage of bricks that start with skew (0-100)
 }
 
 export function BrickBackground({
   palette = "Aquarius",
   className = "",
   seed = 12345,
-  blur = true,
+  blur = false,
   orientation = "horizontal",
   gap = 0,
   backgroundColor = "#E8E3D8",
   animate = false,
+  skewPercentage = 30,
 }: BrickBackgroundProps) {
   const [hoveredBrick, setHoveredBrick] = useState<number | null>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [isReady, setIsReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     if (containerRef.current) {
       const updateDimensions = () => {
@@ -45,8 +48,8 @@ export function BrickBackground({
         setIsReady(true);
       };
       updateDimensions();
-      window.addEventListener('resize', updateDimensions);
-      return () => window.removeEventListener('resize', updateDimensions);
+      window.addEventListener("resize", updateDimensions);
+      return () => window.removeEventListener("resize", updateDimensions);
     }
   }, []);
 
@@ -91,6 +94,7 @@ export function BrickBackground({
                 : Math.min(brickWidth, containerWidth - x)) - gapSize,
             height: brickHeight - gapSize,
             color,
+            hasInitialSkew: random() * 100 < skewPercentage,
           });
         }
       }
@@ -125,23 +129,24 @@ export function BrickBackground({
                 ? brickHeight + y
                 : Math.min(brickHeight, containerHeight - y)) - gapSize,
             color,
+            hasInitialSkew: random() * 100 < skewPercentage,
           });
         }
       }
     }
 
     return bricks;
-  }, [colors, seed, orientation, gap, dimensions]);
+  }, [colors, seed, orientation, gap, dimensions, skewPercentage]);
 
   return (
     <div
       ref={containerRef}
       className={`absolute inset-0 ${className}`}
-      style={{ 
+      style={{
         backgroundColor,
         opacity: isReady ? 1 : 0,
-        filter: isReady ? 'blur(0px)' : 'blur(10px)',
-        transition: 'opacity 0.5s ease-in, filter 0.5s ease-in',
+        filter: isReady ? "blur(0px)" : "blur(10px)",
+        transition: "opacity 0.5s ease-in, filter 0.5s ease-in",
       }}
     >
       {/* Background layer with blur */}
@@ -154,7 +159,15 @@ export function BrickBackground({
           style={{ filter: "blur(1px)", opacity: 0.9, pointerEvents: "none" }}
         >
           {bricks.map((brick, index) => {
-            const skew = animate && hoveredBrick === index ? 5 : 0;
+            const skew = animate
+              ? hoveredBrick === index
+                ? brick.hasInitialSkew
+                  ? 0
+                  : 25
+                : brick.hasInitialSkew
+                  ? 25
+                  : 0
+              : 0;
             // Calculate offset to keep brick centered during skew
             const centerY = brick.y + brick.height / 2;
             const skewOffset = Math.tan((skew * Math.PI) / 180) * centerY;
@@ -188,7 +201,15 @@ export function BrickBackground({
         style={{ pointerEvents: animate ? "auto" : "none" }}
       >
         {bricks.map((brick, index) => {
-          const skew = animate && hoveredBrick === index ? 5 : 0;
+          const skew = animate
+            ? hoveredBrick === index
+              ? brick.hasInitialSkew
+                ? 0
+                : 5
+              : brick.hasInitialSkew
+                ? 5
+                : 0
+            : 0;
           // Calculate offset to keep brick centered during skew
           const centerY = brick.y + brick.height / 2;
           const skewOffset = Math.tan((skew * Math.PI) / 180) * centerY;
