@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { BrickBackground } from "@/components/ui/brick-background";
 import { GradientBackground } from "@/components/ui/gradient-background";
 import { RotatedBrick } from "@/components/ui/rotated-brick";
+import { Header } from "@/components/header";
 import {
   ArrowRight,
   TrendingUp,
@@ -15,35 +16,11 @@ import {
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header/Navigation */}
-      <header className="fixed top-0 w-full bg-background/80 backdrop-blur-sm border-b border-border z-50">
-        <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <a href="/" className="text-2xl font-bold">
-              Stella
-            </a>
-            <div className="hidden md:flex items-center gap-6">
-              <a
-                href="#features"
-                className="text-sm font-medium hover:text-primary transition-colors"
-              >
-                Features
-              </a>
-              <a
-                href="#pricing"
-                className="text-sm font-medium hover:text-primary transition-colors"
-              >
-                Pricing
-              </a>
-            </div>
-          </div>
-          <Button>Get Started</Button>
-        </nav>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20">
-        <div className="text-center px-6">
+        <div className="text-center px-4 sm:px-6">
           <p className="text-muted-foreground mb-4">
             AI-powered financial services
           </p>
@@ -77,7 +54,7 @@ export default function Home() {
       </section>
 
       {/* Features Section - Budgeting */}
-      <section id="features" className="py-20 px-6 bg-muted/30">
+      <section id="features" className="py-20 px-4 sm:px-6 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="h-[500px] flex items-center justify-center">
@@ -120,7 +97,7 @@ export default function Home() {
       </section>
 
       {/* Features Section - Saving */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1 rounded-3xl overflow-hidden h-[400px] shadow-xl relative">
@@ -162,7 +139,7 @@ export default function Home() {
       </section>
 
       {/* Features Section - Investing */}
-      <section className="py-20 px-6 bg-muted/30">
+      <section className="py-20 px-4 sm:px-6 bg-muted/30">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -206,7 +183,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4">
             Stella is for <span className="text-primary">You</span>
@@ -268,7 +245,7 @@ export default function Home() {
       </section>
 
       {/* Privacy Section */}
-      <section className="py-20 px-6 bg-muted/30">
+      <section className="py-20 px-4 sm:px-6 bg-muted/30">
         <div className="max-w-4xl mx-auto text-center">
           <ShieldCheck className="w-16 h-16 mx-auto mb-6 text-primary" />
           <h2 className="text-4xl font-bold mb-4">
@@ -289,7 +266,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl font-bold mb-4">
             Stella. <span className="text-primary">Take control.</span>
@@ -304,7 +281,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-12 px-6">
+      <footer className="border-t border-border py-12 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
