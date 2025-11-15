@@ -1,6 +1,7 @@
 import { BrickBackground } from "@/components/ui/brick-background";
 import { colorPalettes, type PaletteKey } from "@/lib/color-palettes";
 import { PageLayout } from "@/components/page-layout";
+import { CACHE_ONE_YEAR } from "next/dist/lib/constants";
 
 export default function BrickExamplesPage() {
   const palettes = Object.keys(colorPalettes) as PaletteKey[];
@@ -44,7 +45,6 @@ export default function BrickExamplesPage() {
             <div className="w-full h-[400px] relative">
               <BrickBackground
                 palette={palette}
-                orientation="horizontal"
                 gap={10}
                 blur={false}
                 backgroundColor="white"
@@ -53,6 +53,24 @@ export default function BrickExamplesPage() {
             </div>
           </div>
         ))}
+        // Test
+        <div className="space-y-4">
+          {/* Palette Name and Colors */}
+          <div>
+            <h2 className="text-xl font-semibold mb-2">{"Test"}</h2>
+          </div>
+
+          {/* Full Width BrickBackground */}
+          <div className="w-full h-[400px] relative">
+            <BrickBackground
+              palette={"White"}
+              gap={10}
+              blur={false}
+              backgroundColor="#0000ff"
+              animate={true}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Footer */}

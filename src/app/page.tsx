@@ -38,8 +38,7 @@ export default function Home() {
         </div>
         <div className="mt-20 w-full h-[400px] relative">
           <BrickBackground
-            palette="Pisces"
-            orientation="horizontal"
+            palette="Scorpio"
             gap={10}
             blur={false}
             backgroundColor="white"
@@ -56,7 +55,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="h-[500px] flex items-center justify-center">
-              <RotatedBrick palette="Pisces" colorIndex={2} skew={15} />
+              <RotatedBrick palette="Scorpio" colorIndex={2} skew={15} />
             </div>
             <div>
               <h2 className="text-4xl font-bold mb-4">

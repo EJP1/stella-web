@@ -11,6 +11,7 @@ export const colorPalettes = {
   Capricorn: ["#B7A7CB", "#A88160", "#5A7857", "#C3AA6B"],
   Aquarius: ["#B8C576", "#A05FDB", "#6FBFE1", "#4F6157"],
   Pisces: ["#D6A3C5", "#7FA9DE", "#5850A3", "#826154", "#ECE7DC"],
+  White: ["#FFFFFF"],
 } as const;
 
 export type PaletteKey = keyof typeof colorPalettes;
