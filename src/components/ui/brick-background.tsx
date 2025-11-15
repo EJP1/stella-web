@@ -17,7 +17,6 @@ interface BrickBackgroundProps {
   className?: string;
   seed?: number;
   blur?: boolean;
-  orientation?: "horizontal" | "vertical";
   gap?: number;
   backgroundColor?: string;
   animate?: boolean;
@@ -29,7 +28,6 @@ export function BrickBackground({
   className = "",
   seed = 12345,
   blur = false,
-  orientation = "horizontal",
   gap = 0,
   backgroundColor = "#E8E3D8",
   animate = false,
@@ -55,88 +53,48 @@ export function BrickBackground({
 
   // Resolve palette name to colors array
   const colors = typeof palette === "string" ? colorPalettes[palette] : palette;
+  const brickSkew = 15; // Skew angle in degrees for animation
   const bricks = useMemo(() => {
     const random = seededRandom(seed);
     const bricks: Brick[] = [];
     const containerWidth = dimensions.width;
     const containerHeight = dimensions.height;
+    const brickWidth = 24; // Fixed pixel width
+    const brickHeight = 44; // Fixed pixel height
+    const gapSize = gap;
 
-    const baseWidth = 24; // Fixed pixel width
-    const baseHeight = 44; // Fixed pixel height
-    if (orientation === "horizontal") {
-      // Horizontal stacking with fixed brick size
-      const brickWidth = baseWidth; // Fixed pixel width
-      const brickHeight = baseHeight; // Fixed pixel height
-      const gapSize = gap;
+    // Calculate how many bricks fit
+    const cols = Math.ceil(containerWidth / brickWidth);
+    const rows = Math.ceil(containerHeight / brickHeight);
 
-      // Calculate how many bricks fit
-      const cols = Math.ceil(containerWidth / brickWidth);
-      const rows = Math.ceil(containerHeight / brickHeight);
+    for (let row = 0; row < rows; row++) {
+      // Offset every other row by half a brick width for brick pattern
+      const offset = row % 2 === 0 ? 0 : brickWidth / 2;
 
-      for (let row = 0; row < rows; row++) {
-        // Offset every other row by half a brick width for brick pattern
-        const offset = row % 2 === 0 ? 0 : brickWidth / 2;
+      for (let col = 0; col < cols + 1; col++) {
+        const x = col * brickWidth - offset;
 
-        for (let col = 0; col < cols + 1; col++) {
-          const x = col * brickWidth - offset;
+        // Skip bricks that are completely outside the container
+        if (x + brickWidth < 0 || x > containerWidth) continue;
 
-          // Skip bricks that are completely outside the container
-          if (x + brickWidth < 0 || x > containerWidth) continue;
+        const color = colors[Math.floor(random() * colors.length)];
 
-          const color = colors[Math.floor(random() * colors.length)];
-
-          bricks.push({
-            x: Math.max(0, x) + gapSize / 2,
-            y: row * brickHeight + gapSize / 2,
-            width:
-              (x < 0
-                ? brickWidth + x
-                : Math.min(brickWidth, containerWidth - x)) - gapSize,
-            height: brickHeight - gapSize,
-            color,
-            hasInitialSkew: random() * 100 < skewPercentage,
-          });
-        }
-      }
-    } else {
-      // Vertical stacking with fixed brick size
-      const brickWidth = baseHeight; // Fixed pixel width
-      const brickHeight = baseWidth; // Fixed pixel height
-      const gapSize = gap;
-
-      // Calculate how many bricks fit
-      const cols = Math.ceil(containerWidth / brickWidth);
-      const rows = Math.ceil(containerHeight / brickHeight);
-
-      for (let col = 0; col < cols; col++) {
-        // Offset every other column by half a brick height for brick pattern
-        const offset = col % 2 === 0 ? 0 : brickHeight / 2;
-
-        for (let row = 0; row < rows + 1; row++) {
-          const y = row * brickHeight - offset;
-
-          // Skip bricks that are completely outside the container
-          if (y + brickHeight < 0 || y > containerHeight) continue;
-
-          const color = colors[Math.floor(random() * colors.length)];
-
-          bricks.push({
-            x: col * brickWidth + gapSize / 2,
-            y: Math.max(0, y) + gapSize / 2,
-            width: brickWidth - gapSize,
-            height:
-              (y < 0
-                ? brickHeight + y
-                : Math.min(brickHeight, containerHeight - y)) - gapSize,
-            color,
-            hasInitialSkew: random() * 100 < skewPercentage,
-          });
-        }
+        bricks.push({
+          x: Math.max(0, x) + gapSize / 2,
+          y: row * brickHeight + gapSize / 2,
+          width:
+            (x < 0
+              ? brickWidth + x
+              : Math.min(brickWidth, containerWidth - x)) - gapSize,
+          height: brickHeight - gapSize,
+          color,
+          hasInitialSkew: random() * 100 < skewPercentage,
+        });
       }
     }
 
     return bricks;
-  }, [colors, seed, orientation, gap, dimensions, skewPercentage]);
+  }, [colors, seed, gap, dimensions, skewPercentage]);
 
   return (
     <div
@@ -163,9 +121,9 @@ export function BrickBackground({
               ? hoveredBrick === index
                 ? brick.hasInitialSkew
                   ? 0
-                  : 25
+                  : brickSkew * 5
                 : brick.hasInitialSkew
-                  ? 25
+                  ? brickSkew * 5
                   : 0
               : 0;
             // Calculate offset to keep brick centered during skew
@@ -205,9 +163,9 @@ export function BrickBackground({
             ? hoveredBrick === index
               ? brick.hasInitialSkew
                 ? 0
-                : 5
+                : brickSkew
               : brick.hasInitialSkew
-                ? 5
+                ? brickSkew
                 : 0
             : 0;
           // Calculate offset to keep brick centered during skew
