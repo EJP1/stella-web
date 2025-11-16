@@ -37,6 +37,7 @@ export function BrickBackground({
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [isReady, setIsReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const svgCache = useRef<Map<string, string>>(new Map());
 
   useEffect(() => {
     if (containerRef.current) {
@@ -96,6 +97,29 @@ export function BrickBackground({
     return bricks;
   }, [colors, seed, gap, dimensions, skewPercentage]);
 
+  // Generate static SVG background (only when not animating)
+  const staticSvgUrl = useMemo(() => {
+    if (animate || dimensions.width === 0 || dimensions.height === 0) {
+      return null;
+    }
+
+    const cacheKey = `${seed}-${gap}-${skewPercentage}-${dimensions.width}-${dimensions.height}-${colors.join(',')}`;
+    
+    if (svgCache.current.has(cacheKey)) {
+      return svgCache.current.get(cacheKey)!;
+    }
+
+    const svgContent = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="${dimensions.width}" height="${dimensions.height}" viewBox="0 0 ${dimensions.width} ${dimensions.height}" preserveAspectRatio="none" shape-rendering="crispEdges">
+        ${bricks.map((brick) => `<rect x="${brick.x}" y="${brick.y}" width="${brick.width}" height="${brick.height}" fill="${brick.color}"/>`).join('')}
+      </svg>
+    `;
+    
+    const url = `data:image/svg+xml;base64,${btoa(svgContent)}`;
+    svgCache.current.set(cacheKey, url);
+    return url;
+  }, [animate, dimensions, bricks, seed, gap, skewPercentage, colors]);
+
   return (
     <div
       ref={containerRef}
@@ -107,6 +131,17 @@ export function BrickBackground({
         transition: "opacity 0.5s ease-in, filter 0.5s ease-in",
       }}
     >
+      {/* Static SVG background for non-animated cases */}
+      {staticSvgUrl && !blur && (
+        <div
+          className="w-full h-full absolute inset-0"
+          style={{
+            backgroundImage: `url("${staticSvgUrl}")`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+      )}
       {/* Background layer with blur */}
       {blur && (
         <svg
@@ -150,15 +185,16 @@ export function BrickBackground({
           })}
         </svg>
       )}
-      {/* Interactive layer */}
-      <svg
-        className="w-full h-full absolute inset-0"
-        viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
-        preserveAspectRatio="none"
-        shapeRendering="crispEdges"
-        style={{ pointerEvents: animate ? "auto" : "none" }}
-      >
-        {bricks.map((brick, index) => {
+      {/* Interactive layer - only render when animating or blurring */}
+      {(animate || blur) && (
+        <svg
+          className="w-full h-full absolute inset-0"
+          viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+          preserveAspectRatio="none"
+          shapeRendering="crispEdges"
+          style={{ pointerEvents: animate ? "auto" : "none" }}
+        >
+          {bricks.map((brick, index) => {
           const skew = animate
             ? hoveredBrick === index
               ? brick.hasInitialSkew
@@ -206,7 +242,8 @@ export function BrickBackground({
             </g>
           );
         })}
-      </svg>
+        </svg>
+      )}
     </div>
   );
 }
