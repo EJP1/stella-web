@@ -38,10 +38,10 @@ export default function Home() {
         </div>
         <div className="mt-20 w-full h-[400px] relative">
           <BrickBackground
-            palette="Scorpio"
+            palette="Blue"
             gap={10}
             blur={false}
-            backgroundColor="white"
+            backgroundColor="#FFFFFF"
             animate
           />
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
