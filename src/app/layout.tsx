@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
+  subsets: ["latin"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -23,7 +30,7 @@ export default function RootLayout({
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/mnj1wph.css" />
       </head>
-      <body className={`${inter.variable} antialiased overflow-x-hidden`}>
+      <body className={`${inter.variable} ${spaceMono.variable} antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>
